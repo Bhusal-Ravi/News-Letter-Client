@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --color-paper: #faf1da;
+  --color-surface: #f4dfb4;
+  --color-ink: #1a1208;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+}
+
+.stamp {
+  display: inline-block;
+  border: 2px solid var(--color-ink);
+  padding: 0.35rem 0.75rem;
+  background: var(--color-surface);
+}
