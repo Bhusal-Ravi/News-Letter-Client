@@ -357,37 +357,6 @@ export default function App() {
 	)
 }
 
-function MiniList({
-	title,
-	items,
-	loading,
-}: {
-	title: string
-	items: DashboardItem[]
-	loading: boolean
-}) {
-	return (
-		<div className="rounded-2xl border border-black/8 bg-[#fbf8f1] p-4">
-			<p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
-				{title}
-			</p>
-			<div className="mt-3 space-y-2">
-				{loading ? (
-					<div className="h-16 animate-pulse rounded-xl bg-black/5" />
-				) : items.length > 0 ? (
-					items.slice(0, 3).map((item) => (
-						<div key={`${title}-${item.label}`} className="rounded-xl bg-white px-3 py-2 text-sm text-neutral-700">
-							{formatRow(title, item)}
-						</div>
-					))
-				) : (
-					<p className="rounded-xl bg-white px-3 py-2 text-sm text-neutral-500">No data</p>
-				)}
-			</div>
-		</div>
-	)
-}
-
 function formatRow(title: string, item: DashboardItem) {
 	if (title === 'Fetched today') {
 		return `${item.value} articles fetched today${item.label ? ` for ${item.label}` : ''}`
