@@ -357,17 +357,7 @@ export default function App() {
 	)
 }
 
-function formatRow(title: string, item: DashboardItem) {
-	if (title === 'Fetched today') {
-		return `${item.value} articles fetched today${item.label ? ` for ${item.label}` : ''}`
-	}
 
-	if (title === 'Total sent') {
-		return `${item.value} articles sent in total${item.label ? ` for ${item.label}` : ''}`
-	}
-
-	return `${item.label}: ${item.value} articles per tag`
-}
 
 function humanizeLabel(label: string) {
 	const l = label.trim()
