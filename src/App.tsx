@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { FormEvent } from 'react'
+import News from './News'
+import { MoveDown } from 'lucide-react';
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error'
 
@@ -177,8 +179,8 @@ export default function App() {
 	const sentItems = toItems(dashboard.total_articles_sent ?? [], 'total')
 
 	return (
-		<div className="relative min-h-dvh overflow-y-auto bg-[#faf9f8] text-neutral-900">
-			<div className="absolute inset-0 -z-10 h-[60vh] bg-gradient-to-b from-[#e3dac9] via-[#f0e6d2] to-[#faf9f8]" />
+		<div className="relative min-h-dvh  bg-[#faf9f8] text-neutral-900">
+			<div className="absolute inset-0 -z-10 h-[60vh] bg-linear-to-b from-[#e3dac9] via-[#f0e6d2] to-[#faf9f8]" />
 
 			<main className="mx-auto flex w-full max-w-7xl flex-col items-center px-5 pt-24 pb-20 md:px-12 md:pt-32">
 				<section className="flex w-full max-w-4xl flex-col items-center text-center">
@@ -199,7 +201,7 @@ export default function App() {
 						Fresh, precise, and waiting in your inbox every single morning.
 					</p>
 
-					<div className="mt-12 w-full max-w-xl rounded-2xl bg-gradient-to-br from-[#f8dec1] to-white p-2 shadow-2xl">
+					<div className="mt-12 w-full max-w-xl rounded-2xl bg-linear-to-br from-[#f8dec1] to-white p-2 shadow-2xl">
 						{status === 'success' ? (
 									<div className="rounded-xl border border-black/10 bg-white p-6 text-left transition-all duration-200 ease-in-out">
 								<p className="text-xs font-semibold uppercase tracking-[0.15em] text-black">
@@ -236,6 +238,8 @@ export default function App() {
 							</form>
 						)}
 
+							
+
 						{status === 'error' && message && (
 							<p className="mt-3 text-left text-sm text-red-700">{message}</p>
 						)}
@@ -244,6 +248,11 @@ export default function App() {
 							Join {subscriberCount} early risers
 						</p>
 					</div>
+
+						<div className='w-full mt-10  flex flex-col justify-center items-center mb-10'>
+				<MoveDown className='animate-bounce' width={80} height={50} strokeWidth={1} />		
+				<p className='text-sm mt-2'>Scroll Down</p>
+			</div>
 
 					<div className="mt-20 w-full max-w-3xl rounded-md border border-neutral-200 bg-white p-4 text-left">
 						<div className="flex items-center justify-between gap-4">
@@ -351,7 +360,11 @@ export default function App() {
 						))}
 					</div>
 				</section>
+				
 			</main>
+			
+			
+			<News />
 		</div>
 	)
 }
