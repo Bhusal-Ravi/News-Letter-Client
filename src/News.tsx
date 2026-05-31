@@ -18,7 +18,7 @@ interface NewsType {
 }
 
 const PAGE_SIZE = 10
-const API_URL = 'http://localhost:3000/scroll'
+const API_URL = 'https://links.bhusalravi.com.np/scroll'
 
 function formatTimestamp(value?: string) {
   if (!value) return 'Recently'
