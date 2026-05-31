@@ -201,7 +201,7 @@ export default function App() {
 
 					<div className="mt-12 w-full max-w-xl rounded-2xl bg-gradient-to-br from-[#f8dec1] to-white p-2 shadow-2xl">
 						{status === 'success' ? (
-							<div className="rounded-xl border border-black/10 bg-white p-6 text-left">
+									<div className="rounded-xl border border-black/10 bg-white p-6 text-left transition-all duration-200 ease-in-out">
 								<p className="text-xs font-semibold uppercase tracking-[0.15em] text-black">
 									You&apos;re subscribed ✓
 								</p>
@@ -213,7 +213,7 @@ export default function App() {
 						) : (
 							<form
 								onSubmit={handleSubmit}
-								className="relative flex rounded-xl border border-black/10 bg-white/80 backdrop-blur-md"
+										className="relative flex rounded-xl border border-black/10 bg-white/80 backdrop-blur-md transition-all duration-200 ease-in-out"
 							>
 								<input
 									type="email"
@@ -229,7 +229,7 @@ export default function App() {
 								<button
 									type="submit"
 									disabled={status === 'loading'}
-									className="absolute top-2 right-2 bottom-2 rounded-lg bg-black px-8 text-xs font-bold uppercase tracking-[0.15em] text-white transition hover:bg-neutral-800 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+											className="absolute top-2 right-2 bottom-2 rounded-lg bg-black px-8 text-xs font-bold uppercase tracking-[0.15em] text-white transition-all duration-200 ease-in-out hover:bg-neutral-800 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
 								>
 									{status === 'loading' ? 'Wait...' : 'Subscribe'}
 								</button>
@@ -249,7 +249,6 @@ export default function App() {
 						<div className="flex items-center justify-between gap-4">
 							<div>
 								<p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">
-									NewsLetter stats
 								</p>
 							</div>
 							{dashboardLoading ? (
@@ -266,16 +265,16 @@ export default function App() {
 						) : (
 							<>
 								{/* Summary stat row */}
-								<div className="mt-4 flex w-full items-stretch justify-between gap-4">
+								<div className="mt-4 grid w-full grid-cols-2 gap-3 md:grid-cols-4">
 									{dashboardSummary.map((item) => (
 										<div
 											key={item.label}
-											className="flex-1 rounded-sm border border-neutral-200 bg-white px-3 py-3 text-center"
+											className="rounded-sm border border-neutral-200 bg-white px-2 py-2 text-center sm:px-3 sm:py-3"
 										>
-											<p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-500">
+											<p className="text-[8px] font-semibold uppercase leading-tight tracking-[0.06em] text-neutral-500 sm:text-[10px] sm:tracking-[0.12em]">
 												{item.label}
 											</p>
-											<p className="mt-1 text-2xl font-mono font-semibold text-black">
+											<p className="mt-1 text-base font-mono font-semibold leading-none text-black sm:text-2xl">
 												{dashboardLoading ? '—' : item.value}
 											</p>
 										</div>
@@ -335,9 +334,9 @@ export default function App() {
 						].map(({ num, title, body }) => (
 							<article
 								key={num}
-								className="group relative overflow-hidden border border-neutral-200/70 bg-white/50 p-12 backdrop-blur-sm transition duration-500 hover:bg-white/70"
+									className="group relative overflow-hidden border border-neutral-200/70 bg-white/50 p-12 backdrop-blur-sm transition-all duration-200 ease-in-out hover:bg-white/70"
 							>
-								<div className="absolute -top-8 -right-4 select-none font-serif text-[10rem] font-bold leading-none text-neutral-200/40 transition group-hover:text-neutral-300/50">
+									<div className="absolute -top-8 -right-4 select-none font-serif text-[10rem] font-bold leading-none text-neutral-200/40 transition-all duration-200 ease-in-out group-hover:text-neutral-300/50">
 									{num}
 								</div>
 
@@ -386,60 +385,107 @@ function capitalizeWords(text: string) {
 }
 
 function CategoryTable({
-	categories,
-	fetched,
-	sent,
-	loading,
+  categories,
+  fetched,
+  sent,
+  loading,
 }: {
-	categories: DashboardItem[]
-	fetched: DashboardItem[]
-	sent: DashboardItem[]
-	loading: boolean
+  categories: DashboardItem[]
+  fetched: DashboardItem[]
+  sent: DashboardItem[]
+  loading: boolean
 }) {
-	const map = (arr: DashboardItem[]) => new Map(arr.map((i) => [i.label, i.value]))
-	const cMap = map(categories)
-	const fMap = map(fetched)
-	const sMap = map(sent)
+  const map = (arr: DashboardItem[]) => new Map(arr.map((i) => [i.label, i.value]))
+  const cMap = map(categories)
+  const fMap = map(fetched)
+  const sMap = map(sent)
 
-	const labels = Array.from(new Set([...cMap.keys(), ...fMap.keys(), ...sMap.keys()]))
+  const labels = Array.from(new Set([...cMap.keys(), ...fMap.keys(), ...sMap.keys()]))
 
-	return (
-		<table className="w-full table-fixed border-collapse text-sm">
-			<thead>
-				<tr className="text-left text-xs text-neutral-500">
-					<th className="w-1/3 pb-2">Category</th>
-					<th className="w-1/6 pb-2">Articles/tag</th>
-					<th className="w-1/6 pb-2">Fetched today</th>
-					<th className="w-1/6 pb-2">Total sent</th>
-				</tr>
-			</thead>
-			<tbody>
-				{loading ? (
-					<tr>
-						<td colSpan={4} className="py-6 text-neutral-400">Loading…</td>
-					</tr>
-				) : labels.length === 0 ? (
-					<tr>
-						<td colSpan={4} className="py-3 text-neutral-500">No data</td>
-					</tr>
-				) : (
-					labels.map((lbl) => {
-						const display = humanizeLabel(lbl)
-						const cat = cMap.get(lbl) ?? 0
-						const f = fMap.get(lbl) ?? 0
-						const s = sMap.get(lbl) ?? 0
+  if (loading) {
+    return <p className="py-6 text-sm text-neutral-400">Loading…</p>
+  }
 
-						return (
-							<tr key={lbl} className="border-t border-neutral-100">
-								<td className="py-3 align-top text-neutral-700">{display}</td>
-								<td className="py-3 align-top text-neutral-700"><span className="font-mono">{cat}</span> articles/tag</td>
-								<td className="py-3 align-top text-neutral-700"><span className="font-mono">{f}</span></td>
-								<td className="py-3 align-top text-neutral-700"><span className="font-mono">{s}</span></td>
-							</tr>
-						)
-					})
-				)}
-			</tbody>
-		</table>
-	)
+  if (labels.length === 0) {
+    return <p className="py-3 text-sm text-neutral-500">No data</p>
+  }
+
+  return (
+    <>
+      {/* ── Mobile: card stack ── */}
+      <div className="flex flex-col gap-3 md:hidden">
+        {labels.map((lbl) => {
+          const display = humanizeLabel(lbl)
+          const cat = cMap.get(lbl) ?? 0
+          const f = fMap.get(lbl) ?? 0
+          const s = sMap.get(lbl) ?? 0
+
+          return (
+            <div
+              key={lbl}
+	              className="rounded-sm border border-neutral-200 bg-white px-3 py-2.5 transition-all duration-200 ease-in-out hover:border-neutral-300 hover:shadow-sm"
+            >
+	              <p className="mb-2 text-[9px] font-semibold uppercase leading-tight tracking-[0.06em] text-neutral-800">
+                {display}
+              </p>
+	              <div className="grid grid-cols-3 gap-1 text-center">
+                {[
+                  { label: 'Articles/tag', val: `${cat}` },
+                  { label: 'Fetched today', val: `${f}` },
+                  { label: 'Total sent', val: `${s}` },
+                ].map(({ label, val }) => (
+                  <div key={label}>
+	                    <p className="text-[8px] font-semibold uppercase leading-tight tracking-[0.04em] text-neutral-400">
+                      {label}
+                    </p>
+	                    <p className="mt-0.5 font-mono text-xs font-semibold leading-none text-black sm:text-sm">
+                      {val}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* ── Desktop: table ── */}
+      <table className="hidden w-full table-fixed border-collapse text-sm md:table">
+        <thead>
+          <tr className="text-left text-xs text-neutral-500">
+            <th className="w-1/3 pb-2">Category</th>
+            <th className="w-1/6 pb-2">Articles/tag</th>
+            <th className="w-1/6 pb-2">Fetched today</th>
+            <th className="w-1/6 pb-2">Total sent</th>
+          </tr>
+        </thead>
+        <tbody>
+          {labels.map((lbl) => {
+            const display = humanizeLabel(lbl)
+            const cat = cMap.get(lbl) ?? 0
+            const f = fMap.get(lbl) ?? 0
+            const s = sMap.get(lbl) ?? 0
+
+            return (
+              <tr
+                key={lbl}
+	                className="border-t border-neutral-100 transition-all duration-200 ease-in-out hover:bg-neutral-50"
+              >
+                <td className="py-3 align-top text-neutral-700">{display}</td>
+                <td className="py-3 align-top text-neutral-700">
+                  <span className="font-mono">{cat}</span> articles/tag
+                </td>
+                <td className="py-3 align-top text-neutral-700">
+                  <span className="font-mono">{f}</span>
+                </td>
+                <td className="py-3 align-top text-neutral-700">
+                  <span className="font-mono">{s}</span>
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </>
+  )
 }
