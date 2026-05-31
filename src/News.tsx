@@ -163,6 +163,7 @@ function News() {
                   <img
                     src={item.image_url}
                     alt={item.title}
+                    loading="lazy"
                     className="h-full w-full object-cover opacity-95 transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 ) : (
