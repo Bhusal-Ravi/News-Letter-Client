@@ -103,13 +103,13 @@ function News() {
     >
       <section className="mx-auto w-full max-w-7xl px-3 pt-6 md:px-0 md:pt-10">
         <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#695d4a]">
-          Overview
+          Newsletter archive
         </p>
         <h1
           className="mt-2 text-3xl font-bold leading-tight text-black md:text-5xl"
           style={{ fontFamily: 'Libre Caslon Text, serif' }}
         >
-          News delivered to subscribers to date
+          The free automated newsletter editions sent to subscribers
         </h1>
       </section>
 

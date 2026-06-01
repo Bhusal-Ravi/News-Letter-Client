@@ -197,8 +197,8 @@ export default function App() {
 					</h1>
 
 					<p className="mt-8 max-w-2xl text-base leading-8 text-neutral-600 md:text-lg">
-						A fully automated news experience tailored for the Asia/Kathmandu timezone.
-						Fresh, precise, and waiting in your inbox every single morning.
+						A free, fully automated newsletter that sends the day’s most important news straight to your inbox.
+						Delivered every morning at 6:00 AM Asia/Kathmandu time.
 					</p>
 
 					<div className="mt-12 w-full max-w-xl rounded-2xl bg-linear-to-br from-[#f8dec1] to-white p-2 shadow-2xl">
@@ -313,32 +313,32 @@ export default function App() {
 									<>
 										Fully
 										<br />
-										<em className="italic text-[#6e5b44]">Automated</em>
+										<em className="italic text-[#6e5b44]">Newsletter</em>
 									</>
 								),
-								body: 'Gathering and delivering the most crucial updates without human bias. Algorithms designed for signal over noise.',
+								body: 'The system runs automatically from end to end, so every edition is prepared and sent without manual work.',
 							},
 							{
 								num: '02',
 								title: (
 									<>
-										Morning
+										6:00 AM
 										<br />
-										<em className="italic text-[#6e5b44]">Precision</em>
+										<em className="italic text-[#6e5b44]">Delivery</em>
 									</>
 								),
-								body: 'Delivered exactly at 6:00 AM local time. Establishing a predictable rhythm for your intellectual start to the day.',
+								body: 'Get the most impactful news of the day in your inbox every morning at 6:00 AM Asia/Kathmandu time.',
 							},
 							{
 								num: '03',
 								title: (
 									<>
-										Global
+										Free
 										<br />
-										<em className="italic text-[#6e5b44]">Perspective</em>
+										<em className="italic text-[#6e5b44]">Access</em>
 									</>
 								),
-								body: 'Fresh, critical news synthesized from trusted global sources. A curated lens on international developments.',
+								body: 'Everything is free. You only need to subscribe to start receiving the most important updates.',
 							},
 						].map(({ num, title, body }) => (
 							<article
