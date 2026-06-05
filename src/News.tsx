@@ -19,6 +19,8 @@ interface NewsType {
 
 const PAGE_SIZE = 10
 const API_URL = 'https://links.bhusalravi.com.np/scroll'
+const FALLBACK_IMAGE_SRC =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 750'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f3f1ee'/%3E%3Cstop offset='100%25' stop-color='%23dedbd7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='750' fill='url(%23g)'/%3E%3Ccircle cx='980' cy='170' r='150' fill='%23cfcac4' opacity='0.45'/%3E%3Crect x='120' y='110' width='360' height='22' rx='11' fill='%23b7b1aa' opacity='0.55'/%3E%3Crect x='120' y='156' width='220' height='18' rx='9' fill='%23b7b1aa' opacity='0.35'/%3E%3Cpath d='M180 570l180-170 126 106 92-84 182 148H180z' fill='%23b7b1aa' opacity='0.42'/%3E%3Ccircle cx='362' cy='302' r='56' fill='none' stroke='%23b7b1aa' stroke-width='20' opacity='0.32'/%3E%3C/svg%3E"
 
 function formatTimestamp(value?: string) {
   if (!value) return 'Recently'
@@ -165,6 +167,10 @@ function News() {
                     alt={item.title}
                     loading="lazy"
                     className="h-full w-full object-cover opacity-95 transition-transform duration-500 group-hover:scale-[1.02]"
+                    onError={(event) => {
+                      event.currentTarget.src = FALLBACK_IMAGE_SRC
+                      event.currentTarget.classList.add('grayscale', 'opacity-75')
+                    }}
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-[#e9e8e6]">
