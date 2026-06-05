@@ -53,7 +53,7 @@ function News() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [hasMore, setHasMore] = useState(true)
-  const [currentNews, setCurrentNews] = useState('technews')
+  const [currentNews, setCurrentNews] = useState('worldnews')
   const category: string[] = ['worldnews', 'technews']
   const offset = useRef(0)
   const busy = useRef(false)
