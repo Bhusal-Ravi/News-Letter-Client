@@ -184,7 +184,7 @@ export default function App() {
 
 			<main className="mx-auto flex w-full max-w-7xl flex-col items-center px-5 pt-24 pb-20 md:px-12 md:pt-32">
 				<section className="flex w-full max-w-4xl flex-col items-center text-center">
-					<div className="mb-8 inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
+					<div className="mb-8 inline-flex items-center gap-2 rounded-sm bg-black px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
 						<div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#f8dec1]" />
 						Delivered at 6:00 AM · NPT
 					</div>
